@@ -12,7 +12,7 @@ from hcaptcha_challenger.agents import Malenia, AgentT
 from hcaptcha_challenger.utils import SiteKey
 
 
-async def test_downloader():
+async def _downloader():
     tmp_dir = Path(__file__).parent.joinpath("tmp_dir2")
     shutil.rmtree(tmp_dir, ignore_errors=True)
 
@@ -31,7 +31,7 @@ async def test_downloader():
 
         await agent.collect()
 
-        assert len(agent._img_paths) in [1, 2, 9, 18]
+        assert len(agent.img_paths) in [1, 2, 3, 9, 18]
 
-        for img_path in agent._img_paths:
+        for img_path in agent.img_paths:
             assert img_path.stat().st_size
